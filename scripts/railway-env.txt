@@ -1,0 +1,56 @@
+# Railway Environment Variables Configuration
+# Copy this to your Railway dashboard or use the CLI commands below
+
+# ============================================
+# Supabase Configuration
+# ============================================
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+
+# ============================================
+# Paystack Configuration
+# ============================================
+PAYSTACK_SECRET_KEY=sk_test_your_secret_key
+PAYSTACK_WEBHOOK_SECRET=your_webhook_secret
+
+# ============================================
+# Frontend Configuration
+# ============================================
+FRONTEND_URL=https://surepay.vercel.app
+API_URL=https://surepay-backend.railway.app
+
+# ============================================
+# Email Configuration (Resend)
+# ============================================
+RESEND_API_KEY=re_NhihqPVs_NqK5fws34VjGweSRPddhUutM
+EMAIL_FROM=noreply@surepay.link
+EMAIL_FROM_NAME=SurePay
+
+# ============================================
+# Admin Configuration
+# ============================================
+DEFAULT_ADMIN_EMAIL=admin@surepay.link
+DEFAULT_ADMIN_PASSWORD=Admin123!
+
+# ============================================
+# Environment
+# ============================================
+ENVIRONMENT=production
+
+# ============================================
+# CLI Commands to Set These Variables
+# ============================================
+# Copy and paste these commands to set variables via Railway CLI:
+
+# railway variables set SUPABASE_URL=https://your-project.supabase.co
+# railway variables set SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+# railway variables set PAYSTACK_SECRET_KEY=sk_test_your_secret_key
+# railway variables set PAYSTACK_WEBHOOK_SECRET=your_webhook_secret
+# railway variables set FRONTEND_URL=https://surepay.vercel.app
+# railway variables set API_URL=https://surepay-backend.railway.app
+# railway variables set RESEND_API_KEY=re_NhihqPVs_NqK5fws34VjGweSRPddhUutM
+# railway variables set EMAIL_FROM=noreply@surepay.link
+# railway variables set EMAIL_FROM_NAME=SurePay
+# railway variables set DEFAULT_ADMIN_EMAIL=admin@surepay.link
+# railway variables set DEFAULT_ADMIN_PASSWORD=Admin123!
+# railway variables set ENVIRONMENT=production
