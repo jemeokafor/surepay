@@ -14,8 +14,7 @@ router = APIRouter()
 logger = logging.getLogger(__name__)
 
 @router.post("/create")
-@rate_limit_payout_creation()
-async def create_payout(payout_data: dict, request: Request):
+async def create_payout(request: Request, payout_data: dict):
     """
     Create a new payout transfer
     Rate limited to 5 requests per minute per IP
