@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 @router.post("/initialize")
 @rate_limit_payment_initialization()
-async def initialize_payment(transaction_data: dict):
+async def initialize_payment(transaction_data: dict, request: Request):
     """
     Initialize a new payment transaction
     Rate limited to 10 requests per minute per IP

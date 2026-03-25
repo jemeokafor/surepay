@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from app.services import paystack, supabase
 from app.core.config import settings
 from app.core.security_middleware import (
@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 @router.post("/create")
 @rate_limit_payout_creation()
-async def create_payout(payout_data: dict):
+async def create_payout(payout_data: dict, request: Request):
     """
     Create a new payout transfer
     Rate limited to 5 requests per minute per IP
