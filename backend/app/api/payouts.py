@@ -2,7 +2,6 @@ from fastapi import APIRouter, HTTPException, Request
 from app.services import paystack, supabase
 from app.core.config import settings
 from app.core.security_middleware import (
-    rate_limit_payout_creation, 
     sanitize_input, 
     validate_amount
 )

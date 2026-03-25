@@ -2,9 +2,8 @@ from fastapi import APIRouter, HTTPException, Request
 from app.services import paystack, supabase
 from app.core.config import settings
 from app.core.security_middleware import (
-    rate_limit_payment_initialization, 
-    sanitize_input, 
-    validate_email, 
+    sanitize_input,
+    validate_email,
     validate_amount
 )
 from app.core.monitoring import business_analytics, performance_monitor
