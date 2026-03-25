@@ -11,12 +11,24 @@ class PaystackAPI:
             "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}",
             "Content-Type": "application/json"
         }
-        self.client = httpx.AsyncClient(base_url=self.base_url, headers=self.headers)
+        # Only create client if we have a valid API key
+        self.client = None
+        if settings.PAYSTACK_SECRET_KEY:
+            self.client = httpx.AsyncClient(base_url=self.base_url, headers=self.headers)
+    
+    async def _ensure_client(self):
+        """Ensure client is initialized"""
+        if not self.client and settings.PAYSTACK_SECRET_KEY:
+            self.client = httpx.AsyncClient(base_url=self.base_url, headers=self.headers)
+        return self.client is not None
     
     async def initialize_transaction(self, amount: int, email: str, reference: str, metadata: dict = None):
         """
         Initialize a new Paystack transaction
         """
+        if not await self._ensure_client():
+            raise Exception("Paystack client not initialized")
+            
         payload = {
             "amount": amount,
             "email": email,
@@ -33,6 +45,9 @@ class PaystackAPI:
         """
         Verify a Paystack transaction
         """
+        if not await self._ensure_client():
+            raise Exception("Paystack client not initialized")
+            
         response = await self.client.get(f"/transaction/verify/{reference}")
         response.raise_for_status()
         return response.json()
@@ -41,6 +56,9 @@ class PaystackAPI:
         """
         Create a transfer recipient
         """
+        if not await self._ensure_client():
+            raise Exception("Paystack client not initialized")
+            
         payload = {
             "type": "nuban",
             "name": name,
@@ -57,6 +75,9 @@ class PaystackAPI:
         """
         Initiate a transfer
         """
+        if not await self._ensure_client():
+            raise Exception("Paystack client not initialized")
+            
         headers = dict(self.headers)
         if idempotency_key:
             headers["Idempotency-Key"] = idempotency_key
@@ -76,6 +97,9 @@ class PaystackAPI:
         """
         Get transfer details
         """
+        if not await self._ensure_client():
+            raise Exception("Paystack client not initialized")
+            
         response = await self.client.get(f"/transfer/{transfer_id}")
         response.raise_for_status()
         return response.json()
@@ -84,6 +108,9 @@ class PaystackAPI:
         """
         Check Paystack API health
         """
+        if not await self._ensure_client():
+            return "disconnected: client not initialized"
+            
         try:
             response = await self.client.get("/balance")
             response.raise_for_status()

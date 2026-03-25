@@ -16,6 +16,15 @@ class Settings(BaseSettings):
     # API settings
     API_URL: str = "http://localhost:8000"
     
+    # Email settings
+    RESEND_API_KEY: str = ""
+    EMAIL_FROM: str = "noreply@surepay.link"
+    EMAIL_FROM_NAME: str = "SurePay"
+    
+    # Admin settings
+    DEFAULT_ADMIN_EMAIL: str = "admin@surepay.link"
+    DEFAULT_ADMIN_PASSWORD: str = "Admin123!"  # This should be changed in production
+    
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
